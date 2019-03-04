@@ -1,0 +1,285 @@
+<ion-header >
+  <ion-toolbar color='primary'   >
+    <button ion-button icon-only style="background :none; " (click)='Logout()' clear>
+      <ion-icon style="color: white"  name="log-out"></ion-icon>
+    </button>
+    <ion-title style="color: white">TODO List</ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-input type="text" value="{{todoitem}}" (input)="updatetodoitem($event)" placeholder="Enter todo item Name"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-input type='text' value="{{tododesc}}" (input)="tododescription($event)" placeholder="Description"></ion-input>
+  </ion-item>
+  <ion-list>
+
+    <ion-item>
+      <ion-label>Select Icon</ion-label>
+      <ion-select value="{{icon}}" #C (ionChange)="iconselection(C.value)" okText="Okay" cancelText="Dismiss">
+        <ion-select-option value="bookmark">BookMark</ion-select-option>
+        <ion-select-option value="add-circle">Add</ion-select-option>
+        <ion-select-option value="alarm">Alarm</ion-select-option>
+        <ion-select-option value="albums">Albums</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+  </ion-list>
+  <ion-item>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-button color='primary' (click)="AddinTodolist()">Add</ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button color='primary' (click)="Update()">Update</ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button color='primary' (click)="ToDoCompleted()">Completed</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+
+  </ion-item>
+
+
+  
+   
+
+        <ion-grid>
+          <ion-row >
+            <ion-col fixed='true' size='6' class="gridrowpadding" *ngFor="let item of properties| async">
+                <div *ngIf="(item.completeStatus==false)"  >
+
+                
+                    <ion-grid >
+                      <ion-row >
+                        <ion-col class="gridrowpadding" fixed=true size='4'>
+                            <ion-icon style="zoom: 3;" name="{{item.iconlabel}}"></ion-icon>
+                        </ion-col>
+                        <ion-col fixed='true' class="gridrowpadding" size='8'>
+                          <ion-grid >
+                            <ion-row>
+                              <ion-col size="12">
+                                  <ion-text >
+                                      <p style="margin-top: 0; margin-bottom: 0; font-weight: bold">{{item.itemName}}</p>
+                                    </ion-text>
+                              </ion-col>
+                            </ion-row>
+                            <ion-row>
+                                <ion-col size="12">
+                                    <ion-text >
+                                        <p style="margin-top: 0;margin-bottom: 0; color: rgb(70, 70, 70)">{{item.description}}</p>
+                                      </ion-text>
+                                </ion-col>
+                              </ion-row>
+                                 
+                             
+                              <ion-row text-left>
+                                  <ion-col class="gridrowpadding" size="4">
+                                      <button ion-button icon-only class="iconbutton" (click)='Edit(item)'>
+                                          <ion-icon  name="create"></ion-icon>
+                                        </button>
+                                  </ion-col>
+                                  <ion-col class="gridrowpadding" size='4'>
+                                      <button ion-button icon-only class="iconbutton" (click)='Delete(item.key)'>
+                                          <ion-icon  name="close"></ion-icon>
+                                        </button>
+                                  </ion-col>
+                                  <ion-col size='4' text-left>
+                                      <button ion-button icon-only class="iconbutton" >
+                                          <ion-checkbox (ionChange)='complete(item ,$event)' checked='{{item.completeStatus}}'  style="--border-color: black; --size:20px"></ion-checkbox>
+                                      </button>
+                                    
+                                  </ion-col>
+                                </ion-row>
+                          </ion-grid>
+                        </ion-col>
+                      </ion-row>
+                    </ion-grid>
+                    
+                  </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+
+        
+
+
+
+
+
+
+      <!-- <ion-grid class="gridrowpadding">
+            <ion-row class="gridrowpadding">
+              <ion-col class="gridrowpadding" size='6'>
+                  <ion-row class="gridrowpadding">
+                      <ion-col class="gridrowpadding" size="3">
+                          <ion-icon class="gridrowpadding"  style="color: primary" name="{{item.iconlabel}}"></ion-icon>
+                        
+                      </ion-col>
+                      <ion-col size='6'>
+                        ion-col
+                      </ion-col>
+                      <ion-col size="3">
+                        ion-col [size="3"]
+                      </ion-col>
+                    </ion-row>
+              </ion-col>
+              
+              <ion-col size='6'>
+                  <ion-row class="gridrowpadding">
+                      <ion-col class="gridrowpadding" size="3">
+                          <ion-icon class="gridrowpadding"  style="color: primary" name="{{item.iconlabel}}"></ion-icon>
+                        
+                      </ion-col>
+                      <ion-col size='6'>
+                        ion-col
+                      </ion-col>
+                      <ion-col size="3">
+                        ion-col [size="3"]
+                      </ion-col>
+                    </ion-row>
+              </ion-col>
+            </ion-row>
+        
+
+
+      </ion-grid> -->
+
+      <!-- <ion-label>
+        <ion-grid>
+
+          <ion-row>
+            <ion-col size="3">
+              <ion-icon style="zoom:3.5; color: primary" name="{{item.iconlabel}}"></ion-icon>
+            </ion-col>
+
+
+            <ion-col>
+
+              <ion-row>
+                <ion-col></ion-col>
+                <ion-col></ion-col>
+              </ion-row>
+
+
+
+
+
+
+              <ion-row>
+                <ion-col class="gridrowpadding">
+                  <ion-text>
+                    <h3>{{item.itemName}}</h3>
+                  </ion-text>
+                </ion-col>
+
+              </ion-row>
+              <ion-row>
+                <ion-col class="gridrowpadding">
+                  <ion-text size='12' style='color: rgb(94, 94, 94)'>
+                    <p>{{item.description}}</p>
+                  </ion-text>
+                </ion-col>
+
+              </ion-row>
+
+
+
+              <ion-row>
+                <ion-col class="gridrowpadding">
+                  <ion-icon name="star"></ion-icon>
+                  <ion-icon name="star"></ion-icon>
+                  <ion-icon name="star"></ion-icon>
+                  <ion-icon name="star"></ion-icon>
+                  <ion-icon name="star"></ion-icon>
+
+
+                </ion-col>
+                <ion-col >
+
+                  <p style='color: rgb(94, 94, 94)'>120,123</p>
+
+                </ion-col>
+              </ion-row>
+
+
+
+              <ion-row>
+                <ion-col class="gridrowpadding">
+                  
+                    <ion-badge color="medium">{{item.iconlabel}}</ion-badge>
+                  
+                </ion-col>
+
+              </ion-row>
+
+
+            </ion-col>
+            <ion-col size="3">
+              <ion-col size='6'>
+                <button ion-button icon-only class="iconbutton" (click)='Edit(item)' clear>
+                  <ion-icon name="create"></ion-icon>
+                </button>
+              </ion-col>
+              <ion-col size='6'>
+                <button ion-button icon-only class="iconbutton" (click)='Delete(item.key)' clear>
+                  <ion-icon name="close"></ion-icon>
+                </button>
+              </ion-col>
+
+
+
+            </ion-col>
+          </ion-row>
+
+
+
+        </ion-grid>
+
+
+      </ion-label> -->
+   
+  
+
+
+  <!-- <ion-grid>
+    <ion-row>
+      <ion-list>
+        <ion-item *ngFor="let item of properties| async">
+          <ion-label>
+            <ion-col>
+              <p> {{item.itemName}}</p>
+            </ion-col>
+            <ion-col>
+              <ion-icon (click)='Delete(item.key)' name="close"></ion-icon>
+              <ion-icon (click)='Edit(item)' name="create"></ion-icon>
+            </ion-col>
+
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-row>
+  </ion-grid> -->
+
+
+
+
+  <!--   
+  <ul>
+    <li *ngFor="let item of properties| async">
+      {{item.itemName}}
+      <ion-icon (click)='Delete(item.key)' name="close"></ion-icon>
+      <ion-icon (click)='Edit(item)' name="create"></ion-icon>
+    </li>
+  </ul> -->
+
+
+
+
+</ion-content>

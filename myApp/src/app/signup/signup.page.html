@@ -1,0 +1,62 @@
+<ion-header>
+  <ion-toolbar color='primary'>
+    <ion-title style="color:white">signup</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <form [formGroup]="myform">
+
+    <!-- textfield -->
+    <ion-item>
+      <ion-input required type="text" formControlName='fullname' placeholder="First Name"></ion-input>
+    </ion-item>
+    <p [ngStyle]="{'color':'red'}" class="form-control-feedback" *ngIf="fullname.invalid && fullname.dirty">
+      Field is invalid
+    </p>
+
+    <!-- email -->
+    <ion-item>
+      <ion-input required type="text" formControlName='email' placeholder="Enter Email"></ion-input>
+    </ion-item>
+    <p [ngStyle]="{'color':'red'}" class="form-control-feedback" *ngIf="email.invalid && email.dirty">
+      Field is invalid
+    </p>
+
+    <!-- radio button -->
+
+    <ion-item>
+      <input type="radio" value="male" formControlName='gender'>Male
+
+      <input type="radio" value="female" formControlName='gender'>female
+
+    </ion-item>
+
+    <!-- password -->
+    <ion-item>
+      <ion-input required type="password" formControlName='password' placeholder="Password"></ion-input>
+    </ion-item>
+    <p [ngStyle]="{'color':'red'}" class="form-control-feedback" *ngIf="fullname.invalid && fullname.dirty">
+      Field is invalid
+    </p>
+
+    <!-- <ion-list radio-group >
+      <ion-list-header>Gender</ion-list-header>
+        <ion-item>
+          <ion-label>Friends</ion-label>
+          <ion-radio value="friends" formControlName='gender' ></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-label>Family</ion-label>
+          <ion-radio value="family" formControlName='gender'></ion-radio>
+        </ion-item>
+      </ion-list> -->
+
+    <!-- button -->
+    <ion-button color="primary" (click)="showdata()" [disabled]='myform.invalid'>Submit</ion-button>
+
+    
+
+
+  </form>
+</ion-content>
